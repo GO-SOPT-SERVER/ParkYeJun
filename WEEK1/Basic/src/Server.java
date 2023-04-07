@@ -28,7 +28,7 @@ public class Server implements Part {
 
     @Override
     public void participate() {
-        System.out.println("모두 " + name + "세미나에서 만나요!");
+        System.out.println("모두 " + name + " 세미나에서 만나요!");
     }
 
     @Override
