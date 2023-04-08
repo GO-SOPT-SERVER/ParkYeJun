@@ -26,6 +26,10 @@ public class GoServer {
         System.out.println("server 변수의 메모리주소: " + System.identityHashCode(server));
         System.out.println();
 
+        System.out.println("📍name 파라미터를 넘겨서 생성한 Plan 클래스의 객체는 this()로 default constructor를 호출하고 있다.");
+        plan.printPlanInfo();
+        plan1.printPlanInfo();
+
         // Part 인터페이스를 구현한 Server 클래스와 Part 클래스는 각각에서 구현한 메서드를 호출한다.
         System.out.println("📍같은 Part Interface의 메서드이지만, 서로 다른 메서드를 호출하여 다른 결과가 출력된다.");
         System.out.println("서버에서는 ... 👇");
@@ -37,7 +41,6 @@ public class GoServer {
         plan.communicate();
         plan.study();
         System.out.println();
-        plan1.printPlanInfo();
 
         // Member, List 클래스로 구성된 Server 파트의 정보와 drink() 호출 전후로 변화되는 정보에 주목하자.
         System.out.println("📍Member에 소속된 Leader가 상속을 받으며, super/this 등의 키워드를 통해 원하는 메서드가 호출되는 것을 명시적으로 확인할 수 있다.");

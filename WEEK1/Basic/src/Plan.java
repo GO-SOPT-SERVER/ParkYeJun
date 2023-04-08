@@ -6,7 +6,7 @@ public class Plan implements Part {  // 서버 파트 외 기획으로 선정한
     private List<Member> memberList;
     private Leader partLeader;
 
-    // 여기는 Default Constructor 만!
+    // Default Constructor
     public Plan() {
         name = Part.PREFIX + " " + "Plan-part";
         memberList = new ArrayList<Member>();

@@ -33,7 +33,7 @@ public class Server implements Part {
 
     @Override
     public void study() {
-        System.out.println("스터디 합시다~");
+        System.out.println("서버 스터디 합시다~");
     }
 
     @Override
