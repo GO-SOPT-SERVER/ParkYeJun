@@ -1,6 +1,7 @@
 package sopt.org.SecondSeminar.domain.board;
 
 import lombok.Getter;
+import sopt.org.SecondSeminar.controller.board.dto.request.UpdateBoardRequestDto;
 
 @Getter
 public class Board {
@@ -18,6 +19,13 @@ public class Board {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Board update(UpdateBoardRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+
+        return this;
     }
 
     @Override
