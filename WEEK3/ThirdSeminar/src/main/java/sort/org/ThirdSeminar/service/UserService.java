@@ -14,6 +14,9 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    /**
+     * 회원가입(User 생성)
+     */
     @Transactional  // 트랜잭션 처리를 위한 어노테이션
     public UserResponseDto create(UserRequestDto request) {
         User user = User.builder()
@@ -26,4 +29,12 @@ public class UserService {
 
         return UserResponseDto.of(user.getId(), user.getNickname());
     }
+
+    /**
+     * ID로 User 조회하기
+     */
+    public UserResponseDto getUser(Long userId) {
+        return UserResponseDto.of(userRepository.findById(userId));
+    }
+
 }
