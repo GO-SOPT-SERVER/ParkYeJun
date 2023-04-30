@@ -1,9 +1,7 @@
 package sort.org.ThirdSeminar.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sort.org.ThirdSeminar.common.dto.ApiResponseDto;
 import sort.org.ThirdSeminar.controller.dto.request.PostCreateRequestDto;
 import sort.org.ThirdSeminar.controller.dto.response.PostResponseDto;
@@ -11,6 +9,7 @@ import sort.org.ThirdSeminar.exception.SuccessStatus;
 import sort.org.ThirdSeminar.service.PostService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,5 +20,15 @@ public class PostController {
     @PostMapping("/post")
     public ApiResponseDto<PostResponseDto> createPost(@RequestBody @Valid final PostCreateRequestDto request) {
         return ApiResponseDto.success(SuccessStatus.POST_CREATE_SUCCESS, postService.create(request));
+    }
+
+    @GetMapping("/post/user/{userId}")
+    public ApiResponseDto<List<PostResponseDto>> getPostListByUser(@PathVariable("userId") final Long userId) {
+        return ApiResponseDto.success(SuccessStatus.GET_POST_SUCCESS, postService.getPostListByUser(userId));
+    }
+
+    @GetMapping("/post/{postId}")
+    public ApiResponseDto<PostResponseDto> getPostById(@PathVariable("postId") final Long postId) {
+        return ApiResponseDto.success(SuccessStatus.GET_POST_SUCCESS, postService.getPostById(postId));
     }
 }

@@ -49,4 +49,12 @@ public class PostService {
         return result;
     }
 
+    /**
+     * ID로 Post 조회하기
+     */
+    public PostResponseDto getPostById(Long postId) {
+        Post findPost = postRepository.findById(postId);
+        return PostResponseDto.of(findPost);
+    }
+
 }
