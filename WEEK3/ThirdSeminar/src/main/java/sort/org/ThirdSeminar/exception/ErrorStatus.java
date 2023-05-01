@@ -14,7 +14,8 @@ public enum ErrorStatus {
      */
     VALIDATION_EXCEPTION(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
     VALIDATION_REQUEST_MISSING_EXCEPTION(HttpStatus.BAD_REQUEST, "요청값이 입력되지 않았습니다."),
-    NO_EXISTS_USER(HttpStatus.INTERNAL_SERVER_ERROR, "존재하지 않는 유저입니다."),
+    NO_EXISTS_USER(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다."),
+    NO_EXISTS_POST(HttpStatus.NOT_FOUND, "존재하지 않는 게시글입니다."),
 
     /**
      * Conflict

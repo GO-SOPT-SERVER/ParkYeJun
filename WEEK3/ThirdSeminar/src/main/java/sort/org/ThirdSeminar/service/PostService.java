@@ -3,11 +3,13 @@ package sort.org.ThirdSeminar.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sort.org.ThirdSeminar.common.advice.BaseException;
 import sort.org.ThirdSeminar.controller.dto.request.PostCreateRequestDto;
 import sort.org.ThirdSeminar.controller.dto.response.PostResponseDto;
 import sort.org.ThirdSeminar.domain.Category;
 import sort.org.ThirdSeminar.domain.Post;
 import sort.org.ThirdSeminar.domain.User;
+import sort.org.ThirdSeminar.exception.ErrorStatus;
 import sort.org.ThirdSeminar.infrastructure.PostRepository;
 import sort.org.ThirdSeminar.infrastructure.UserRepository;
 
@@ -25,8 +27,10 @@ public class PostService {
      * 게시글 생성
      */
     @Transactional
-    public PostResponseDto create(PostCreateRequestDto request) {
-        User writer = userRepository.findById(request.getWriterId());
+    public PostResponseDto create(PostCreateRequestDto request) throws BaseException {
+        User writer = userRepository.findById(request.getWriterId()).orElseThrow(
+                () -> new BaseException(ErrorStatus.NO_EXISTS_USER)
+        );
         Post post = Post.builder()
                 .title(request.getTitle())
                 .writer(writer)
@@ -40,8 +44,10 @@ public class PostService {
     /**
      * 특정 User의 게시글 목록 조회하기
      */
-    public List<PostResponseDto> getPostListByUser(Long userId) {
-        User writer = userRepository.findById(userId);
+    public List<PostResponseDto> getPostListByUser(Long userId) throws BaseException {
+        User writer = userRepository.findById(userId).orElseThrow(
+                () -> new BaseException(ErrorStatus.NO_EXISTS_USER)
+        );
         List<PostResponseDto> result = new ArrayList<>();
         for(Post post : writer.getPostList()) {
             result.add(PostResponseDto.of(post));
@@ -52,8 +58,10 @@ public class PostService {
     /**
      * ID로 Post 조회하기
      */
-    public PostResponseDto getPostById(Long postId) {
-        Post findPost = postRepository.findById(postId);
+    public PostResponseDto getPostById(Long postId) throws BaseException {
+        Post findPost = postRepository.findById(postId).orElseThrow(
+                () -> new BaseException(ErrorStatus.NO_EXISTS_POST)
+        );
         return PostResponseDto.of(findPost);
     }
 
