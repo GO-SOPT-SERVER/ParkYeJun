@@ -1,6 +1,7 @@
 package sort.org.ThirdSeminar.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import sort.org.ThirdSeminar.common.advice.BaseException;
 import sort.org.ThirdSeminar.common.dto.ApiResponseDto;
@@ -19,6 +20,7 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("/post")
+    @ResponseStatus(HttpStatus.CREATED)
     public ApiResponseDto<PostResponseDto> createPost(@RequestBody @Valid final PostCreateRequestDto request) {
         try {
             return ApiResponseDto.success(SuccessStatus.POST_CREATE_SUCCESS, postService.create(request));
@@ -28,6 +30,7 @@ public class PostController {
     }
 
     @GetMapping("/post/user/{userId}")
+    @ResponseStatus(HttpStatus.OK)
     public ApiResponseDto<List<PostResponseDto>> getPostListByUser(@PathVariable("userId") final Long userId) {
         try {
             return ApiResponseDto.success(SuccessStatus.GET_POST_SUCCESS, postService.getPostListByUser(userId));

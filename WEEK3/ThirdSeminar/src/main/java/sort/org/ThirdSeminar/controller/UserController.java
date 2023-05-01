@@ -21,7 +21,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/user/signup")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)   // 응답 코드 설정하기 -> 이를 동적으로 변경하고 싶다면 ResponseEntity를 사용!
     public ApiResponseDto<UserResponseDto> create(@RequestBody @Valid final UserRequestDto request) {
         return ApiResponseDto.success(SuccessStatus.SIGNUP_SUCCESS, userService.create(request));
     }

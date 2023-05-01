@@ -20,5 +20,6 @@ public class PostCreateRequestDto {
     @NotNull
     private String category;
 
+    @NotNull
     private Long writerId;
 }
