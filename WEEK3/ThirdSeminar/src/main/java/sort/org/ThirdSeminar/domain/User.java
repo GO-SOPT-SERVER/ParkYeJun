@@ -38,8 +38,4 @@ public class User extends BaseTimeEntity {
         this.password = password;
     }
 
-    public void addPost(Post post) {
-        postList.add(post);
-        post.setWriter(this);
-    }
 }

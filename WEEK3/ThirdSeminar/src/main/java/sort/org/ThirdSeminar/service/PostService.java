@@ -37,7 +37,8 @@ public class PostService {
                 .content(request.getContent())
                 .category(Category.nameOf(request.getCategory()))
                 .build();
-        writer.addPost(post);
+
+        post.setWriter(writer);
         return PostResponseDto.of(post);
     }
 

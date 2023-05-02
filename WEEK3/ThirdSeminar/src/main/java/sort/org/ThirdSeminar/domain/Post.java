@@ -41,5 +41,6 @@ public class Post extends BaseTimeEntity {
 
     public void setWriter(User user) {
         this.writer = user;
+        writer.getPostList().add(this);
     }
 }
