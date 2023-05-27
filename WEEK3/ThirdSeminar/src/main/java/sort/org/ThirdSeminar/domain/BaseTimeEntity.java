@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 @Getter
 @MappedSuperclass // JPA Entity 클래스들이 BaseTimeEntity 를 상속하는 경우, 필드(createdAt, modifiedAt)들도 모두 컬럼으로 인식하도록 한다.
@@ -24,13 +25,14 @@ public abstract class BaseTimeEntity {
 
     @PrePersist
     public void onPrePersist() {
-        this.createdAt = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        this.modifiedAt = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.createdAt = LocalDate.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+        this.modifiedAt = LocalDate.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+
     }
 
     @PreUpdate
     public void onPreUpdate() {
-        this.modifiedAt = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.modifiedAt = LocalDate.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
     }
 
 }

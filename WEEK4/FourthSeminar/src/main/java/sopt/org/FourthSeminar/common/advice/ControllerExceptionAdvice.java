@@ -4,11 +4,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import sopt.org.FourthSeminar.common.dto.ApiResponse;
 import sopt.org.FourthSeminar.exception.Error;
+import sopt.org.FourthSeminar.exception.model.BadRequestException;
 import sopt.org.FourthSeminar.exception.model.SoptException;
 
 import java.util.Objects;
@@ -33,8 +35,14 @@ public class ControllerExceptionAdvice {
         return ApiResponse.error(Error.REQUEST_VALIDATION_EXCEPTION, String.format("%s. (%s)", fieldError.getDefaultMessage(), fieldError.getField()));
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(BadRequestException.class)  // 이 클래스는 SoptException을 상속받고 있으므로 없어도 똑같이 동작
+    protected ApiResponse<Object> handleBadRequestException(final BadRequestException e) {
+        return ApiResponse.error(e.getError(), e.getMessage());
+    }
+
     /**
-     * 500 Server Error
+     * 500 Server Error -> 서비스 단에서 예외가 꼼꼼하게 처리된 상태에서 500에러를 던지는 게 좋음
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
@@ -49,5 +57,13 @@ public class ControllerExceptionAdvice {
     protected ResponseEntity<ApiResponse> handleSoptException(SoptException e) {
         return ResponseEntity.status(e.getHttpStatus())
                 .body(ApiResponse.error(e.getError(), e.getMessage()));
+    }
+
+    /**
+     * Header에 원하는 Key가 없는 경우
+     */
+    @ExceptionHandler(MissingRequestHeaderException.class)
+    protected ApiResponse<Object> handlerMissingRequestHeaderException(final MissingRequestHeaderException e) {
+        return ApiResponse.error(Error.HEADER_REQUEST_MISSING_EXCEPTION, Error.HEADER_REQUEST_MISSING_EXCEPTION.getMessage());
     }
 }

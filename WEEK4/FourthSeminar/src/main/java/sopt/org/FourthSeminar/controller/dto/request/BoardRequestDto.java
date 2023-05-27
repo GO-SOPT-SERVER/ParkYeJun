@@ -13,8 +13,9 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BoardRequestDto {
 
-    @Email
-    private String email;
+    // 유저 조회를 이메일이 아닌 JWT 토큰 내의 유저 아이디로 하기 위해 이메일 주석처리!
+//    @Email
+//    private String email;
 
     @NotBlank
     private String title;

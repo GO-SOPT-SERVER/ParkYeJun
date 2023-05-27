@@ -22,8 +22,8 @@ public class BoardService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void create(BoardRequestDto request) {
-        User user = userRepository.findByEmail(request.getEmail())
+    public void create(Long userId, BoardRequestDto request) {
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(Error.NOT_FOUND_USER_EXCEPTION, Error.NOT_FOUND_USER_EXCEPTION.getMessage()));
 
         Board newBoard = Board.newInstance(
