@@ -18,10 +18,9 @@ public enum Error {
     HEADER_REQUEST_MISSING_EXCEPTION(HttpStatus.BAD_REQUEST, "헤더값이 입력되지 않았습니다."),
     VALIDATION_WRONG_TYPE_EXCEPTION(HttpStatus.BAD_REQUEST, "잘못된 타입이 입력되었습니다."),
     PARAMETER_TYPE_MISMATCH_EXCEPTION(HttpStatus.BAD_REQUEST, "파라미터의 타입이 잘못됐습니다"),
+    INVALID_PASSWORD_EXCEPTION(HttpStatus.BAD_REQUEST, "잘못된 비밀번호가 입력되었습니다."),
+    INVALID_MULTIPART_EXTENSION_EXCEPTION(HttpStatus.BAD_REQUEST, "잘못된 파일 형식입니다."),
 
-    NO_EXISTS_USER(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다."),
-    NO_EXISTS_POST(HttpStatus.NOT_FOUND, "존재하지 않는 게시글입니다."),
-    INVALID_PASSWORD_EXCEPTION(HttpStatus.NOT_FOUND, "잘못된 비밀번호가 입력되었습니다."),
 
     /**
      * 401 Unauthorized
@@ -36,6 +35,10 @@ public enum Error {
     NOT_FOUND_USER_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다"),
     NOT_FOUND_POST_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 게시물입니다"),
     NOT_FOUND_EMOTION_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 감정 기록입니다"),
+    NOT_FOUND_SAVE_IMAGE_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 이미지입니다."),
+    NO_EXISTS_USER(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다."),
+    NO_EXISTS_POST(HttpStatus.NOT_FOUND, "존재하지 않는 게시글입니다."),
+
 
     /**
      * 409 Conflict

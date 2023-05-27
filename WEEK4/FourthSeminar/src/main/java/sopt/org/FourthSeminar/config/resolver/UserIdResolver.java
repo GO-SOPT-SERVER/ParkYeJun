@@ -26,7 +26,7 @@ public class UserIdResolver implements HandlerMethodArgumentResolver {  // @Requ
     @Override
     public Object resolveArgument(@NotNull MethodParameter parameter, ModelAndViewContainer mavContainer, @NotNull NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         final HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
-        final String token = request.getHeader("Authorization");
+        final String token = request.getHeader("Authorization").split(" ")[1];
 
         // 토큰 검증
         if (!jwtService.verifyToken(token)) {

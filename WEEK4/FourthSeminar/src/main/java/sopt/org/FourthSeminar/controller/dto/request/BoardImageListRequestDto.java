@@ -1,26 +1,18 @@
 package sopt.org.FourthSeminar.controller.dto.request;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class BoardRequestDto {
+public class BoardImageListRequestDto {
 
-    // 유저 조회를 이메일이 아닌 JWT 토큰 내의 유저 아이디로 하기 위해 이메일 주석처리!
-//    @Email
-//    private String email;
-
-    @NotNull
-    private MultipartFile thumbnail;
+    private List<MultipartFile> boardImages;
 
     @NotBlank
     private String title;
@@ -30,4 +22,8 @@ public class BoardRequestDto {
 
     @NotNull
     private Boolean isPublic;
+
+    public void setBoardImages(List<MultipartFile> boardImages) {
+        this.boardImages = boardImages;
+    }
 }
