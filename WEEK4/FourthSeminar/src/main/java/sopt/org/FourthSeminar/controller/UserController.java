@@ -9,6 +9,7 @@ import sopt.org.FourthSeminar.common.dto.ApiResponse;
 import sopt.org.FourthSeminar.config.jwt.JwtService;
 import sopt.org.FourthSeminar.controller.dto.request.UserLoginRequestDto;
 import sopt.org.FourthSeminar.controller.dto.request.UserRequestDto;
+import sopt.org.FourthSeminar.controller.dto.response.TokenDto;
 import sopt.org.FourthSeminar.controller.dto.response.UserLoginResponseDto;
 import sopt.org.FourthSeminar.controller.dto.response.UserResponseDto;
 import sopt.org.FourthSeminar.exception.Success;
@@ -38,8 +39,9 @@ public class UserController {
     @Operation(summary = "유저 로그인 API", description = "유저가 서버에 로그인을 요청합니다.")  // swagger
     public ApiResponse<UserLoginResponseDto> login(@RequestBody @Valid final UserLoginRequestDto request) {
         final Long userId = userService.login(request);
-        final String token = jwtService.issuedToken(String.valueOf(userId));
-        return ApiResponse.success(Success.LOGIN_SUCCESS, UserLoginResponseDto.of(userId, token));
+        final TokenDto token = jwtService.issuedToken(String.valueOf(userId));
+
+        return ApiResponse.success(Success.LOGIN_SUCCESS, UserLoginResponseDto.of(userId, token.getAccessToken(), token.getRefreshToken()));
     }
 
 }

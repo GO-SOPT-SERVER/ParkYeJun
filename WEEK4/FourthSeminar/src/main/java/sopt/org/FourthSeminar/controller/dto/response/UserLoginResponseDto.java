@@ -12,8 +12,9 @@ public class UserLoginResponseDto {
 
     private Long userId;
     private String accessToken;
+    private String refreshToken;
 
-    public static UserLoginResponseDto of(Long userId, String accessToken) {
-        return new UserLoginResponseDto(userId, accessToken);
+    public static UserLoginResponseDto of(Long userId, String accessToken, String refreshToken) {
+        return new UserLoginResponseDto(userId, accessToken, refreshToken);
     }
 }
