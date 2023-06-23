@@ -16,7 +16,7 @@ public class RedisConfig {
 
     private final int redisPort;
 
-    public RedisConfig(@Value("${spring.redis.host") final String redisHost,
+    public RedisConfig(@Value("${spring.redis.host}") final String redisHost,
                        @Value("${spring.redis.port}") final int redisPort) {
         this.redisHost = redisHost;
         this.redisPort = redisPort;

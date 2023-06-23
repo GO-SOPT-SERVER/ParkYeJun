@@ -91,8 +91,9 @@ public class JwtService {
     }
 
     private Key getSigningKey() {
-        final byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
-        return Keys.hmacShaKeyFor(keyBytes);
+        /*final byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
+        return Keys.hmacShaKeyFor(keyBytes);*/
+        return Keys.secretKeyFor(SignatureAlgorithm.HS512);
     }
 
     // JWT 토큰 검증
