@@ -51,7 +51,7 @@ jobs: ## 어떤 작업을 실행시킬 것인가?
         touch ./application.yml
 
         # GitHub-Actions 에서 설정한 값을 application.yml 파일에 쓰기
-        echo "${{ secrets.TRAVALUE_APPLICATION }}" >> ./application.yml
+        echo "${{ secrets.SOPT_APPLICATION }}" >> ./application.yml
         
         # application.yml 파일 확인
         cat ./application.yml
