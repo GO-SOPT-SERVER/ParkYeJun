@@ -4,7 +4,7 @@ name: GO-SOPT-Server CD
 # 해당 workflow가 언제 실행될 것인지에 대한 트리거를 지정
 on:
   push:
-    branches: [ main ] # main branch로 push 될 때 실행됩니다.
+    branches: [ main ] # main branch로 push 될 때 실행됩니다. (pull request까지 정상적으로 실행되었을 때 배포되도록 하기 위해 push에 대해서만 지정)
 
 env:
   S3_BUCKET_NAME: sopt32-seminar
@@ -53,6 +53,7 @@ jobs:
     - name: Build with Gradle # 실제 application build(-x 옵션을 통해 test는 제외)
       run: ./gradlew build -x test
       
+    ## GitHub에서 제공하는 환경에 맞게 구성
     # 디렉토리 생성
     - name: Make Directory
       run: mkdir -p deploy
@@ -65,11 +66,11 @@ jobs:
     - name: Copy appspec.yml
       run: cp appspec.yml ./deploy
 
-    # script files 복사
+    # script files 복사 (EC2 서버에 미리 올려두고 실행만 하도록 설정하는 방식도 있음)
     - name: Copy script
       run: cp ./scripts/*.sh ./deploy
       
-    - name: Make zip file
+    - name: Make zip file (압축 파일 생성)
       run: zip -r ./sopt_server.zip ./deploy
       shell: bash
       
@@ -83,7 +84,7 @@ jobs:
     - name: Upload to S3
       run: aws s3 cp --region ap-northeast-2 ./sopt_server.zip s3://$S3_BUCKET_NAME/
       
-    # Deploy
+    # Deploy (AWS Credential을 가져와 권한을 인증한 후에 ec2 인스턴스에 zip파일 업로드하여 배포!)
     - name: Deploy
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
