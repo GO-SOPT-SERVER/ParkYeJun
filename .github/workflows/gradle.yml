@@ -66,4 +66,4 @@ jobs: ## 어떤 작업을 실행시킬 것인가?
     - name: Build with Gradle # 실제 application build(-x 옵션을 통해 test는 제외)
       run: |
         cd ./WEEK4/FourthSeminar
-        ./.gradlew build -x test
+        ./gradlew build -x test
