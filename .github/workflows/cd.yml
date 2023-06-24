@@ -7,7 +7,7 @@ on:
     branches: [ main ] # main branch로 push 될 때 실행됩니다. (pull request까지 정상적으로 실행되었을 때 배포되도록 하기 위해 push에 대해서만 지정)
 
 env:
-  S3_BUCKET_NAME: sopt32-seminar
+  S3_BUCKET_NAME: sopt32-seminar-jjun
 
 jobs:
   build:
@@ -98,5 +98,5 @@ jobs:
         --application-name sopt-server-codedeploy
         --deployment-group-name sopt-server-codedeploy-group
         --file-exists-behavior OVERWRITE 
-        --s3-location bucket=sopt32-seminar,bundleType=zip,key=sopt_server.zip
+        --s3-location bucket=sopt32-seminar-jjun,bundleType=zip,key=sopt_server.zip
         --region ap-northeast-2
