@@ -44,8 +44,8 @@ jobs: ## 어떤 작업을 실행시킬 것인가?
     - name: make application.yml 파일 생성
       run: |
         ## create application.yml
-        mkdir ./src/main/resources
-        cd ./src/main/resources
+        mkdir ./WEEK4/FourthSeminar/src/main/resources
+        cd ./WEEK4/FourthSeminar/src/main/resources
 
         # application.yml 파일 생성 (touch: 빈 파일 생성하는 리눅스 명령어)
         touch ./application.yml
