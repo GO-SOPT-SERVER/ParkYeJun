@@ -59,7 +59,7 @@ jobs: ## 어떤 작업을 실행시킬 것인가?
         
     # 이 워크플로우는 gradle build
     - name: Grant execute permission for gradlew
-      run: 
+      run: |
         cd ./WEEK4/FourthSeminar
         chmod +x gradlew
       
